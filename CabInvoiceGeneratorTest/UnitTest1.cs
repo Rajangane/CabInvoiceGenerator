@@ -85,6 +85,28 @@ namespace CabInvoiceGeneratorTest
                 Assert.AreEqual(expected, exception.Message);
             }
         }
+        /// <summary>
+        /// Given Invalid Time Should Throw Custom Exception
+        /// </summary>
+        [TestMethod]
+        public void GivenInvalidTimeShouldThrowCustomException()
+        {
+            //Creating instance of InvoiceGenerator for Normal Ride
+            invoiceGenerator = new InvoiceGenerator(RideType.NORMAL);
+            double distance = 2.0;
+            int time = -5;
+            string expected = "Invalid Time";
+            try
+            {
+                //Calculating Fare
+                double fare = invoiceGenerator.CalculateFare(distance, time);
+            }
+            catch (CabInvoiceCustomException exception)
+            {
+                //Asserting Values
+                Assert.AreEqual(expected, exception.Message);
+            }
+        }
 
     }
 }
