@@ -125,6 +125,28 @@ namespace CabInvoiceGeneratorTest
             //Asserting Values
             Assert.AreEqual(expected, fare);
         }
+        /// <summary>
+        /// Given Invalid Ride Type Should Throw Custom Exception
+        /// </summary>
+        [TestMethod]
+        public void GivenInvalidMultipleRidesShouldThrowCustomException()
+        {
+            //Creating instance of InvoiceGenerator For Normal Ride
+            invoiceGenerator = new InvoiceGenerator(RideType.NORMAL);
+            Ride[] rides = { };
+            string expected = "Rides Are Null";
+            try
+            {
+                //Generating Summary for Rides
+                InvoiceSummary invoiceSummary = invoiceGenerator.CalculateFare(rides);
+                InvoiceSummary expectedSummary = new InvoiceSummary(2, 30.0);
+            }
+            catch (CabInvoiceCustomException exception)
+            {
+                //Asserting Values
+                Assert.AreEqual(expected, exception.Message);
+            }
+        }
 
     }
 }
