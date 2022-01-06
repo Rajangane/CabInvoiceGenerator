@@ -107,6 +107,24 @@ namespace CabInvoiceGeneratorTest
                 Assert.AreEqual(expected, exception.Message);
             }
         }
+        /// <summary>
+        /// TestCase for Checking Calculate Fare Function for Minimum Time and Distance
+        /// </summary>
+        [TestMethod]
+        public void GivenLessDistanceOrTimeShouldReturnMinimumFare()
+        {
+            //Creating instance of InvoiceGenerator for Normal Ride
+            invoiceGenerator = new InvoiceGenerator(RideType.NORMAL);
+            double distance = 0.1;
+            int time = 1;
+
+            //Calculating Fare
+            double fare = invoiceGenerator.CalculateFare(distance, time);
+            double expected = 5;
+
+            //Asserting Values
+            Assert.AreEqual(expected, fare);
+        }
 
     }
 }
