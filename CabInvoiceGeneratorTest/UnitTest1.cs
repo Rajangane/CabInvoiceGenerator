@@ -41,6 +41,9 @@ namespace CabInvoiceGeneratorTest
             Assert.AreEqual(expectedSummary.GetType(), summary.GetType());
             //Assert.AreEqual(expectedSummary, summary);
         }
+        /// <summary>
+        /// given invaid Ride Type should throw custom exception
+        /// </summary>
         [TestMethod]
         public void GivenInvalidRideTypeShouldThrowCustomException()
         {
@@ -58,6 +61,28 @@ namespace CabInvoiceGeneratorTest
             {
                 //Asserting Values
                 Assert.AreEqual(expected, exception);
+            }
+        }
+        /// <summary>
+        /// Given Invalid Distance Should Throw Custom Exception
+        /// </summary>
+        [TestMethod]
+        public void GivenInvalidDistanceShouldThrowCustomException()
+        {
+            //Creating instance of InvoiceGenerator for Normal Ride
+            invoiceGenerator = new InvoiceGenerator(RideType.NORMAL);
+            double distance = -2.0;
+            int time = 5;
+            string expected = "Invalid Distance";
+            try
+            {
+                //Calculating Fare
+                double fare = invoiceGenerator.CalculateFare(distance, time);
+            }
+            catch (CabInvoiceCustomException exception)
+            {
+                //Asserting Values
+                Assert.AreEqual(expected, exception.Message);
             }
         }
 
